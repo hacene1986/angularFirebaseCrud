@@ -7,6 +7,7 @@
     <table class="table">
         <thead>
           <tr>
+            <th scope="col">#</th>
             <th scope="col">Prénom</th>
             <th scope="col">Nom</th>
             <th scope="col">Email</th>
@@ -15,27 +16,18 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-            <td><button class="btn btn-danger">X</button>&nbsp;&nbsp;&nbsp;<button class="btn btn-warning">edite</button></td>
+          <tr *ngFor="let adr of contactAdresses; let i = index">
+            <th scope="row">{{1 + i}}</th>
+            <td>{{adr.prenom}}</td>
+            <td>{{adr.nom}}</td>
+            <td>{{adr.email}}</td>
+            <td>
+              <div *ngFor="let tel of adr.tel;">
+                {{tel}}
+              </div>
+            </td>
+            <td><button class="btn btn-danger" (click)="removeContact(adr)">X</button>&nbsp;&nbsp;&nbsp;<button class="btn btn-warning" (click)="edit(adr.id)">edite</button></td>
 
-          </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-            <td><button class="btn btn-danger">X</button></td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td>Larry</td>
-            <td>the Bird</td>
-            <td>@twitter</td>
-            <td><button class="btn btn-danger">X</button></td>
           </tr>
         </tbody>
       </table>

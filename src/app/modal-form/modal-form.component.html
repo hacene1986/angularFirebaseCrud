@@ -3,29 +3,48 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">New message</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="close()">
           <span aria-hidden="true">&times;</span>
-        </button>
+        </button> -->
       </div>
       <div class="modal-body">
-        <form [formGroup]="contactForm" (ngSubmit)="onSubmit" novalidate>
+        <div class="bg-danger">
+          {{errorMessage}}
+        </div>
+        <form [formGroup]="contactForm" (ngSubmit)="onSubmit">
           <div class="mb-3">
             <label>Nom</label>
-            <input type="text" formControleName="nom" class="form-control" placeholder="Nom">
+            <input type="text" formControlName="nom" class="form-control" placeholder="Nom">
+
+            <!-- <span class="text-danger" *ngIf="nom && nom.invalid">Entrer un text valid</span> -->
           </div>
           <div class="mb-3">
             <label>Prénom</label>
-            <input type="text" formControleName="prenom" class="form-control" placeholder="Prénom">
+            <input type="text" formControlName="prenom" class="form-control" placeholder="Prénom">
           </div>
           <div class="mb-3">
             <label>Email</label>
-            <input type="text" formControleName="email" class="form-control" placeholder="Email">
+            <input type="text" formControlName="email" class="form-control" placeholder="Email">
+          </div>
+
+          <div class="mb-3" formArrayName="tel">
+            <label>Tel</label>
+            
+            <div class="">
+              
+              <div class="p-1" *ngFor="let telephone of contactForm.get('tel').controls; index as i">
+                <input type="text" class="form-control" placeholder="tel" formControlName="{{i}}">
+              </div>
+              
+              <button class="btn btn-success" (click)="addTel()">Ajout numéro</button>
+            </div>
+           
           </div>
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="submit" (click)="onSubmit()" class="btn btn-primary">Send message</button>
+        <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
+        <button type="submit" (click)="onSubmit()" class="btn btn-primary">Ajouter</button>
       </div>
     </div>
   </div>
