@@ -1,10 +1,9 @@
 
 <div class="container">
     <div>
-        <h1>Liste des adresses:</h1>
+        <h1>Liste des contacts:</h1>
     </div>
-   
-    <button class="btn btn-primary">Ajouter une adresse</button>
+    <button class="btn btn-primary" (click)="openModal()">Ajouter un contact</button>
     <table class="table">
         <thead>
           <tr>
@@ -21,7 +20,7 @@
             <td>Mark</td>
             <td>Otto</td>
             <td>@mdo</td>
-            <td><button class="btn btn-danger">X</button><button class="btn btn-warning">X</button></td>
+            <td><button class="btn btn-danger">X</button>&nbsp;&nbsp;&nbsp;<button class="btn btn-warning">edite</button></td>
 
           </tr>
           <tr>
@@ -41,5 +40,8 @@
         </tbody>
       </table>
 
+
+      <app-modal-form></app-modal-form>
+      
       
 </div>
