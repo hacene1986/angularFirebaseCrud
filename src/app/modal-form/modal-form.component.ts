@@ -11,10 +11,12 @@ declare var window: any;
 })
 export class ModalFormComponent implements OnInit {
 
+  submitted = false;
   formModal: any;
   contactForm: any;
   errorMessage!: string;
   contact: any;
+
   constructor(
     public adressService: AdresseService,
     public formBuilder: FormBuilder,
@@ -22,12 +24,14 @@ export class ModalFormComponent implements OnInit {
     
   }
 
-  ngOnInit(): void {
+  
 
+  // get f() { return this.contactForm.controls; }
+
+  ngOnInit(): void {
     this.formModal = new window.bootstrap.Modal(
       document.getElementById("exampleModal")
     );
-    
     this.contactForm = new FormGroup({
       nom: new FormControl('', Validators.compose([Validators.required])),
       prenom: new FormControl('', Validators.compose([Validators.required])),
@@ -42,28 +46,29 @@ export class ModalFormComponent implements OnInit {
   
   }
 
-  get nom(){
-    return this.contactForm.get('nom');
-  }
+  // get nom(){
+  //   return this.contactForm.get('nom');
+  // }
 
-  get prenom(){
-    return this.contactForm.get('prenom');
-  }
+  // get prenom(){
+  //   return this.contactForm.get('prenom');
+  // }
 
-  get email(){
-    return this.contactForm.get('email');
-  }
+  // get email(){
+  //   return this.contactForm.get('email');
+  // }
 
-  get tel(){
-    return this.contactForm.get('tel');
-  }
+  // get tel(){
+  //   return this.contactForm.get('tel');
+  // }
 
 
 
 
   close(){
-    console.log('ok')
+    console.log('ok', this.formModal)
     this.formModal.hide();
+   
   }
 
   LoadEditData(id: any){
@@ -76,14 +81,7 @@ export class ModalFormComponent implements OnInit {
         nom: this.contact.nom,
         prenom: this.contact.prenom,
         email: this.contact.email,
-        tel : this.contact.tel
-        // new FormArray([
-        //   this.contact.tel.forEach((element: any) => {
-        //     console.log("ELEMENT====", element);
-            
-        //     new FormControl(element, Validators.compose([Validators.required]))
-        //   })
-        // ])
+        tel : this.contact.tel 
       })
     })
   }
@@ -98,13 +96,13 @@ export class ModalFormComponent implements OnInit {
   }
 
   onSubmit(){
+    
     console.log(this.contactForm.value)
-    if(this.contactForm.value.nom != "" && this.contactForm.value.prenom != "" && this.contactForm.value.emain != "" && this.contactForm.value.tel){
+    if( localStorage.getItem("ID") != null){
       console.log(this.contact)
       console.log(localStorage.getItem("ID"));
-      
       this.adressService.updateAdress(this.contactForm.value, localStorage.getItem("ID"))
-    
+      localStorage.removeItem("ID");
       return
     }
     if(this.contactForm.valid){

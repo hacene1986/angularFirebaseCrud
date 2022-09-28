@@ -1,22 +1,20 @@
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" >
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">New message</h5>
-        <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="close()">
+        <h5 class="modal-title" id="exampleModalLabel">Nouveau contact</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="close()">
           <span aria-hidden="true">&times;</span>
-        </button> -->
+        </button>
       </div>
       <div class="modal-body">
-        <div class="bg-danger">
+        <div class="alert alert-danger" *ngIf="errorMessage">
           {{errorMessage}}
         </div>
         <form [formGroup]="contactForm" (ngSubmit)="onSubmit">
           <div class="mb-3">
             <label>Nom</label>
             <input type="text" formControlName="nom" class="form-control" placeholder="Nom">
-
-            <!-- <span class="text-danger" *ngIf="nom && nom.invalid">Entrer un text valid</span> -->
           </div>
           <div class="mb-3">
             <label>Prénom</label>
@@ -43,7 +41,7 @@
         </form>
       </div>
       <div class="modal-footer">
-        <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="close()">Close</button>
         <button type="submit" (click)="onSubmit()" class="btn btn-primary">Ajouter</button>
       </div>
     </div>
